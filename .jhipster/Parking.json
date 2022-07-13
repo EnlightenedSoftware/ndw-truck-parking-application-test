@@ -1,0 +1,79 @@
+{
+  "applications": "*",
+  "changelogDate": "20220713091331",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "parking",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "places",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "refrigeratedPlaces",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "lzvPlaces",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "hourlyRate",
+      "fieldType": "Long"
+    },
+    {
+      "fieldName": "pricingUrl",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "otherServicesDescription",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "organization",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "createdOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "createdBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "updatedOn",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "updatedBy",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "isActive",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Parking",
+  "pagination": "pagination",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "parkingEntrance",
+      "otherEntityRelationshipName": "parking",
+      "relationshipName": "parking",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "service": "serviceImpl"
+}

@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="parking">
+      <h2 data-cy="parkingDetailsHeading"><span>Parking</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span>ID</span></dt>
+        <dd>
+          <span>{{ parking.id }}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+          <span>{{ parking.name }}</span>
+        </dd>
+        <dt><span>Location</span></dt>
+        <dd>
+          <span>{{ parking.location }}</span>
+        </dd>
+        <dt><span>Places</span></dt>
+        <dd>
+          <span>{{ parking.places }}</span>
+        </dd>
+        <dt><span>Refrigerated Places</span></dt>
+        <dd>
+          <span>{{ parking.refrigeratedPlaces }}</span>
+        </dd>
+        <dt><span>Lzv Places</span></dt>
+        <dd>
+          <span>{{ parking.lzvPlaces }}</span>
+        </dd>
+        <dt><span>Hourly Rate</span></dt>
+        <dd>
+          <span>{{ parking.hourlyRate }}</span>
+        </dd>
+        <dt><span>Pricing Url</span></dt>
+        <dd>
+          <span>{{ parking.pricingUrl }}</span>
+        </dd>
+        <dt><span>Other Services Description</span></dt>
+        <dd>
+          <span>{{ parking.otherServicesDescription }}</span>
+        </dd>
+        <dt><span>Organization</span></dt>
+        <dd>
+          <span>{{ parking.organization }}</span>
+        </dd>
+        <dt><span>Created On</span></dt>
+        <dd>
+          <span>{{ parking.createdOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Created By</span></dt>
+        <dd>
+          <span>{{ parking.createdBy }}</span>
+        </dd>
+        <dt><span>Updated On</span></dt>
+        <dd>
+          <span>{{ parking.updatedOn | formatMediumDatetime }}</span>
+        </dd>
+        <dt><span>Updated By</span></dt>
+        <dd>
+          <span>{{ parking.updatedBy }}</span>
+        </dd>
+        <dt><span>Is Active</span></dt>
+        <dd>
+          <span>{{ parking.isActive }}</span>
+        </dd>
+        <dt><span>Parking</span></dt>
+        <dd>
+          <div *ngIf="parking.parking">
+            <a [routerLink]="['/parking-entrance', parking.parking?.id, 'view']">{{ parking.parking?.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span>Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/parking', parking.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span>Edit</span>
+      </button>
+    </div>
+  </div>
+</div>
