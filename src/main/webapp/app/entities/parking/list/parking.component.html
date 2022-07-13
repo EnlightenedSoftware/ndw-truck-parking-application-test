@@ -1,0 +1,128 @@
+<div>
+  <h2 id="page-heading" data-cy="ParkingHeading">
+    <span>Parkings</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="loadPage()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span>Refresh List</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-parking"
+        [routerLink]="['/parking/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span> Create a new Parking </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="parkings?.length === 0">
+    <span>No parkings found</span>
+  </div>
+
+  <div class="table-responsive" id="entities" *ngIf="parkings && parkings.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="loadPage()">
+          <th scope="col" jhiSortBy="id"><span>ID</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="name"><span>Name</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="location"><span>Location</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="places"><span>Places</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="refrigeratedPlaces"><span>Refrigerated Places</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="lzvPlaces"><span>Lzv Places</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="hourlyRate"><span>Hourly Rate</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="pricingUrl"><span>Pricing Url</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="otherServicesDescription"><span>Other Services Description</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="organization"><span>Organization</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="createdOn"><span>Created On</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="createdBy"><span>Created By</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="updatedOn"><span>Updated On</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="updatedBy"><span>Updated By</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="isActive"><span>Is Active</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col" jhiSortBy="parking.id"><span>Parking</span> <fa-icon icon="sort"></fa-icon></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let parking of parkings; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/parking', parking.id, 'view']">{{ parking.id }}</a>
+          </td>
+          <td>{{ parking.name }}</td>
+          <td>{{ parking.location }}</td>
+          <td>{{ parking.places }}</td>
+          <td>{{ parking.refrigeratedPlaces }}</td>
+          <td>{{ parking.lzvPlaces }}</td>
+          <td>{{ parking.hourlyRate }}</td>
+          <td>{{ parking.pricingUrl }}</td>
+          <td>{{ parking.otherServicesDescription }}</td>
+          <td>{{ parking.organization }}</td>
+          <td>{{ parking.createdOn | formatMediumDatetime }}</td>
+          <td>{{ parking.createdBy }}</td>
+          <td>{{ parking.updatedOn | formatMediumDatetime }}</td>
+          <td>{{ parking.updatedBy }}</td>
+          <td>{{ parking.isActive }}</td>
+          <td>
+            <div *ngIf="parking.parking">
+              <a [routerLink]="['/parking-entrance', parking.parking?.id, 'view']">{{ parking.parking?.id }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/parking', parking.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/parking', parking.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(parking)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div *ngIf="parkings && parkings.length > 0">
+    <div class="d-flex justify-content-center">
+      <jhi-item-count [params]="{ page: page, totalItems: totalItems, itemsPerPage: itemsPerPage }"></jhi-item-count>
+    </div>
+
+    <div class="d-flex justify-content-center">
+      <ngb-pagination
+        [collectionSize]="totalItems"
+        [(page)]="ngbPaginationPage"
+        [pageSize]="itemsPerPage"
+        [maxSize]="5"
+        [rotate]="true"
+        [boundaryLinks]="true"
+        (pageChange)="loadPage($event)"
+      ></ngb-pagination>
+    </div>
+  </div>
+</div>

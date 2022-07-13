@@ -1,0 +1,36 @@
+{
+  "applications": "*",
+  "changelogDate": "20220713091329",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "contact",
+  "fields": [
+    {
+      "fieldName": "department",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "emailAddress",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "Contact",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [
+    {
+      "otherEntityName": "parking",
+      "otherEntityRelationshipName": "contact",
+      "ownerSide": true,
+      "relationshipName": "contact",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "service": "no"
+}

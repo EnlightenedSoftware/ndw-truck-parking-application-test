@@ -1,0 +1,28 @@
+{
+  "applications": "*",
+  "changelogDate": "20220713091332",
+  "dto": "no",
+  "embedded": false,
+  "entityTableName": "parking_entrance",
+  "fields": [
+    {
+      "fieldName": "location",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "primaryRoadId",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "alternativeRoadId",
+      "fieldType": "String"
+    }
+  ],
+  "fluentMethods": true,
+  "jpaMetamodelFiltering": false,
+  "name": "ParkingEntrance",
+  "pagination": "no",
+  "readOnly": false,
+  "relationships": [],
+  "service": "no"
+}
